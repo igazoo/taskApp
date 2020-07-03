@@ -114,13 +114,12 @@ class TaskController extends Controller
 
     public function _status_change(Request $request, $id){
       $task = Task::find($id);
-      $task->name = $request->input('name');
-      $task->text = $request->input('text');
-      $task->limit_date = $request->input('limit_date');
-      $task->start_date = Carbon::now();
-      $task->end_date = Carbon::now();
-      $task->status = 1;
+
+      $task->status = $request->input('status');
+
       $task->save();
       return redirect('task/index');
     }
+
+
 }

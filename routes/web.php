@@ -25,3 +25,4 @@ Route::post('task/store' ,'TaskController@store')->name('task.store');
 Route::get('task/show/{id}' ,'TaskController@show')->name('task.show');
 Route::get('task/edit/{id}','TaskController@edit')->name('task.edit');
 Route::post('task/update/{id}','TaskController@update')->name('task.update');
+Route::post('task/index/{id}','TaskController@_status_change')->name('task._status_change');
