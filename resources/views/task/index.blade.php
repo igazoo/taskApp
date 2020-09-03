@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
@@ -21,6 +20,8 @@
 
           <form method="POST" action="{{route('task._status_change',['id' =>$task->id])}}">
             @csrf
+            {{$task->name}}
+            {{$task->status}}
             <input type="hidden" name="status" value=1>
             <div class="form-group row mb-0">
               <div class="col-md-6 offset-md-4">
@@ -75,11 +76,35 @@
           </form>
           <a href="{{route('task.show', ['id' => $task->id])}}">詳細</a>
 
-@endif
-@endforeach
+          @endif
+          @endforeach
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div id="stopwatch">
+  <h1 class="ui header">Vue Simple Stop Watch</h1>
+  <div class="column">
+    <p>Elapsed Time:
+      @{{ hours }} :
+      @{{ minutes | zeroPad }} :
+      @{{ seconds | zeroPad }} :
+      @{{ milliSeconds | zeroPad(3) }}</p>
+    <button class="ui secondary button" @click="startTimer" :disabled="isRunning">START</button>
+    <button class="ui button" @click="stopTimer" :disabled="!isRunning">STOP</button>
+    <button class="ui basic button" @click="clearAll">CLEAR</button>
+    <ul class="ui bulleted list" v-if="times.length">
+      <li class="item" v-for="item in times">
+        @{{ item.hours  }} :
+        @{{ item.minutes | zeroPad }} :
+        @{{ item.seconds | zeroPad }} :
+        @{{ item.milliSeconds | zeroPad(3) }}
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- /.ui text container -->
+
 @endsection
